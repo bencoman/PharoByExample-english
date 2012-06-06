@@ -12,6 +12,7 @@
 % 2007-09-11 - Marcus review
 % 2007-09-11 - Orla review
 % 2009-07-04 - Oscar migrated to Pharo
+% 2012-06-04 - Ben Coman began update to Pharo 1.4
 
 %=================================================================
 \ifx\wholebook\relax\else
@@ -56,32 +57,47 @@ You will also learn how to define a new method, create an object and send it mes
 %=================================================================
 \section{Getting started}
 
-\pharo is available as a free \ind{download} from \pharoweb.
-There are three parts that you will need to download, consisting of four files (see \figref{download}).
+\pharo is available as a free \ind{download} from \pharoweb.  For the purpose of working through this book, we recommend you use the \emph{PBE-1.4-OneClick.zip} provided on the Pharo by Example web site.\footnote{\pbe} 
+However most of the introductory material in this book will work with any version, so if you already have one installed, you may as well continue to use it.  
+If you encounter any surprises by way of missing packages, the appendix describes the build of \emph{PBE-1.4-OneClick} from the standard image.  
 
-\begin{figure}[htb]
-\centerline {\includegraphics[width=\textwidth]{annotatedDownload-flat}}
-\caption{The \pharo download files for one of the supported platforms.\figlabel{download}}
-\end{figure}
+The \emph{OneClick.zip} file contains the running system for three platform: Mac, Linux and Windows.  Installation involves merely expanding this zip file to any desired location.
 
-\begin{enumerate}
-
-  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments.  In \figref{download} we see the VM for the selected platform is called \textit{Pharo.exe}.
-
-  \item The \emphind{sources} file contains the source code for all of the parts of \pharo that don't change very frequently. In \figref{download} it is called \emph{SqueakV39.sources}.\footnote{\pharo is derived from \squeak 3.9, and presently shares the VM with \squeak.}
-
-  \item The current \emph{system \ind{image}} is a snapshot of a running \pharo system, frozen in time.  It consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system.
-In \figref{download}, these files are called \emph{pharo.image} and \emph{pharo.changes}.
-\end{enumerate}
-
-\dothis{Download and install \pharo on your computer.}
-We recommend that you use the image provided on the \pharo by Example web page.\footnote{\pbe}
+\dothis{Download and install \emph{PBE-1.4-OneClick.zip} on your computer.}
 \index{download}
 \seclabel{sbeImage}
 
-Most of the introductory material in this book will work with any version, so if you already have one installed, you may as well continue to use it.
-However, if you notice differences between the appearance or behaviour of your system and what is described here, do not be surprised. 
-% On the other hand, if you are about to download \pharo for the first time, you may as well grab the \emph{\pharo by Example} image.
+\newpage
+Located under the expanded \emph{Pharo-1.4-one-click.app} folder are the three main parts of Pharo:  
+
+\begin{enumerate}
+
+  \item The \emphind{virtual machine} (VM) is the only part of the system that is different for each operating system and processor.  Pre-compiled virtual machines are available for all the major computing environments:
+  
+  \begin{enumerate} 
+    \item Mac: \emph{Contents\textbackslash Linux\textbackslash pharo} 
+    \item Linux: \emph{Contents\textbackslash MacOS\textbackslash pharo}   
+    \item Windows: \emph{CogVM.exe}   
+   \end{enumerate}
+  
+
+  \item The \emphind{sources} file contains the source code for all the parts of \pharo that don't change very frequently:
+  
+  \begin{enumerate}
+    \item All platforms: \emph{Contents\textbackslash Resources\textbackslash PharoV10.sources}.
+  \end{enumerate}
+
+  \item The current \emph{system \ind{image}} which is a snapshot of a running \pharo system, frozen in time.  This consists of two files: an \emph{.}\emphind{image} file, which contains the state of all of the objects in the system (including classes and methods, since they are objects too), and a \emph{.}\emphind{changes} file, which contains a log of all of the changes to the source code of the system:
+  
+  \begin{enumerate}
+    \item All platforms: \emph{Contents\textbackslash Resources\textbackslash Pharo-1.4-one-click.image}
+    \item All platforms: \emph{Contents\textbackslash Resources\textbackslash Pharo-1.4-one-click.changes}  
+  \end{enumerate}
+
+\end{enumerate}
+
+
+
 
 As you work in \pharo, the image and changes files are modified, so you need to make sure that they are writable.
 Always keep these two files together.
@@ -105,18 +121,27 @@ Do whatever works best for your style of working and your operating system.
 \index{launching \pharo}
 \paragraph{Launching.} To start \pharo, do whatever your operating system expects: drag the \emph{.}\emphind{image} file onto the icon of the virtual machine, or double-click the \emph{.image} file, or  at the command line type the name of the virtual machine followed by the path to the \emph{.image} file. (When you have multiple VMs installed on your machine the operating system may not automatically pick the right one; in this case it is safer to drag and drop the image onto the virtual machine, or to use the command line.)
 
-Once \pharo is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup}), and it's not obvious how to proceed!
-You might notice a menu bar, but \pharo mainly makes use of context-dependent pop-up menus.
+\dothis{Start Pharo using the method appropriate to your platform: }
+  \begin{enumerate}
+  
+    \item Mac: \emph{ \color{red} \#\#\# TO BE DEFINED BY SOMEONE WITH A MAC \#\#\#}
+  
+    \item Linux: \emph{sh Pharo-1.4-one-click.sh}
+    
+    \item Windows: Double-click on \emph{CogVM.exe}.  \footnote{The associated \emph{CogVM.INI} file defines the location of which image to run.} 
+   
+   \end{enumerate}
+
+
+Once \pharo is running, you should see a single large window, possibly containing some open workspace windows (see \figref{startup})
+You can dismiss any open workspaces by \click{ing} on the cross in the top left corner of the workspace window. Alternatively, the icon next to this is a small line which when \click{ed} minimizes windows to the dock at the bottom of screen.  Clicking the hollow square maximises the window to take up the full screen.
 % You will notice that there is no menu bar, or at least not a useful one.  
 % Instead,  \pharo makes heavy use of context-dependent pop-up menus.
 
-\dothis{Start \pharo. You can dismiss any open workspaces by \click{ing} on the red button in the top left corner of the workspace window.}
-
-You can minimize windows (so that they move to the dock on the bottom of the screen) by \click{ing} on the orange button.  Clicking on the green button will cause the window to take up the entire screen.
 
 %-----------------------------------------------------------------
 \paragraph{First Interaction.}
-
+Now it may not be obvious how to proceed, but \pharo mainly makes use of context-dependent pop-up menus.
 A good place to get started is the \ind{world menu} shown in \figref{threeButtons:click}. 
 
 \dothis{Click with the mouse on the background of the main window to show the world menu, then choose \menu{Workspace} to create a new workspace.}
@@ -162,21 +187,19 @@ Originally \st introduced colours to stand for the different mouse buttons.\foot
 \index{red button}
 \index{yellow button}
 \index{blue button}
-Since many users will use various modifiers keys (\emph{control}, \emph{ALT}, \emph{meta} \etc) to achieve the same effect, we will instead use the following terms:
+Since many users will use various modifiers keys ({\sc crtl}, {\sc alt}, {\sc meta} \etc) to achieve the same effect, we will instead use the following terms:
 \begin{description}
 \item [\click:] this is the most often used mouse button, and is normally equivalent to \click{ing} a single-mouse button without any modifier key; \click{} on the image to bring up the ``World'' menu (\figref{threeButtons:click}).
 \item [\actclick:] this is the next most used button; it is used to bring up a contextual menu, that is, a menu that offers different sets of actions depending on where the mouse is pointing; see \figref{threeButtons:actclick}. If you do not have a multi-button mouse, then normally you will configure the \emph{control} modifier key to \actclick with the mouse button.
-\item [\metaclick:] Finally, you may \metaclick on any object displayed in the image to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:metaclick}.\footnote{Note that the morphic handles are inactive by default in \pharo, but you can turn them on using the Preferences Browser, which we will see shortly.}
+\item [\metaclick:] Finally, you may \metaclick on any object displayed in the image to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:metaclick}.\footnote{Note that the morphic handles are inactive by default in \pharo, but you can turn them on using the Settings Browser, which we will see shortly.}
 If you let the mouse linger over a handle, a help balloon will explain its function.
 In \pharo, how you \metaclick depends on your operating system:
-either you must hold {\sc shift} \emph{ctrl} or {\sc shift} \emph{option} while clicking.
+either you must hold {\sc shift-ctrl}  or {\sc shift-option} while clicking.
 % \ab{This makes it sound like either {\sc shift} \emph{ctrl} or {\sc shift} \emph{alt} will work.  On my (Mac OS) system, only the latter works.  Perhaps we want to say: In \pharo, how you meta-click depends on your operating system. On Linux \ldots}
 % Typically you will use a third modifier key, such as \emph{command} or \emph{meta} to \metaclick.
 \end{description}
 
-\dothis{Type \ct{Time now} in the workspace.
-Now \actclick in the workspace.
-Select \menu{print it}.}
+\dothis{Type \ct{Time now} in the workspace. Now \actclick the workspace and \menu{print it}.}
 
 %Now we will activate \metaclick{ing}.
 
@@ -197,13 +220,13 @@ If you are using a Macintosh without a second mouse button, you can simulate one
 
 You can configure your mouse to work the way you want by using the preferences of your operating system and mouse driver.
 \ab{How can I get meta-click without a three-finger salute?  Is this a secret?}
-\pharo has some preferences for customising the mouse and the meta keys on your keyboard.
-In the preference browser (\menu{System {\ldots\go} Preferences {\ldots\go} Preference Browser\ldots}), the \menu{keyboard} category contains an option \menu{swapControlAndAltKeys} that switches the \actclick and \metaclick functions.
+\pharo has some settings for customising the mouse and the meta keys on your keyboard.
+In the Settings Browser (\menu{World {\go} System {\go} Settings {\go} Settings Browser...}), the item \menu{System {\go} Keyboard {\go} Control and Alt keys} contains an option that switches the \actclick and \metaclick functions.
 There are also options to duplicate the various command keys.   
 
 \begin{figure}[htb]
 \centerline{\includegraphics[width=\textwidth]{PreferenceBrowser}}
-\caption{The Preference Browser.\figlabel{prefBrowser}}
+\caption{The Settings Browser.\figlabel{prefBrowser}}
 \end{figure}
 
 
@@ -295,7 +318,7 @@ You might think that the image is the key mechanism for storing and managing sof
 As we shall see very soon, there are much better tools for managing code and sharing software developed by teams.
 Images are very useful, but you should learn to be very cavalier about creating and throwing away images, since tools like Monticello offer much better ways to manage versions and share code amongst developers.
 
-\dothis{Using the mouse (and the appropriate modifier keys), \metaclick on the \bam.\footnote{Remember, you may have to set the \ct{halosEnabled} option in the Preferences Browser.}}
+\dothis{Using the mouse (and the appropriate modifier keys), \metaclick on the \bam. \footnote{Remember, you may have to set the \ct{halosEnabled} option in the Preferences Browser. \btc{can't see this setting in Setting Browser - still valid?} } }
 You will see a collection of colored circles that are collectively called the \bam's morphic \subind{Morphic}{halo}.
 Each circle is called a \emph{handle}.
 Click in the pink handle containing the cross; the \bam should go away. 
