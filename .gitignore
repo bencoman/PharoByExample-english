@@ -10,6 +10,7 @@
 *.url
 PBE-Omnibus.pdf
 warnings.txt
+warnings.txt.bak
 _git-pull-push.command
 /PBE2.pdf
 **/*.synctex.gz
@@ -27,3 +28,5 @@ Fonts
 test.*
 PharoV10.sources
 .DS_Store
+pdftex.exe.stackdump
+
