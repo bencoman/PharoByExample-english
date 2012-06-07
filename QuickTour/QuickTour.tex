@@ -191,7 +191,7 @@ Since many users will use various modifiers keys ({\sc crtl}, {\sc alt}, {\sc me
 \begin{description}
 \item [\click:] this is the most often used mouse button, and is normally equivalent to \click{ing} a single-mouse button without any modifier key; \click{} on the image to bring up the ``World'' menu (\figref{threeButtons:click}).
 \item [\actclick:] this is the next most used button; it is used to bring up a contextual menu, that is, a menu that offers different sets of actions depending on where the mouse is pointing; see \figref{threeButtons:actclick}. If you do not have a multi-button mouse, then normally you will configure the \emph{control} modifier key to \actclick with the mouse button.
-\item [\metaclick:] Finally, you may \metaclick on any object displayed in the image to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:metaclick}.\footnote{Note that the morphic handles are inactive by default in \pharo, but you can turn them on using the Settings Browser, which we will see shortly.}
+\item [\metaclick:] Finally, you may \metaclick on any object displayed in the image to activate the ``morphic \subind{Morphic}{halo}'', an array of handles that are used to perform operations on the on-screen objects themselves, such as rotating them or resizing them; see \figref{threeButtons:metaclick}.\footnote{Note that the morphic handles are inactive by default in \pharo, but you can turn them on using the Settings Browser, which we will see shortly.\btc{which setting ?} }
 If you let the mouse linger over a handle, a help balloon will explain its function.
 In \pharo, how you \metaclick depends on your operating system:
 either you must hold {\sc shift-ctrl}  or {\sc shift-option} while clicking.
@@ -243,7 +243,7 @@ The world menu provides you a simple means to access many of the tools that \pha
 
 \dothis{Have a closer look at the \menu{World} and \menu{{}Tools \ldots} menus. (\figref{threeButtons:click})}
 
-You will see a list of several of the core tools in \pharo, including the browser and the workspace.
+You will see a list of several of the core tools in \pharo, including the System Browser and the Workspace.
 We will encounter most of them in the coming chapters.
 
 %=================================================================
@@ -262,11 +262,11 @@ BouncingAtomsMorph new openInWorld
 \caption{``Doing'' an expression\figlabel{doit}}
 \end{figure}
 
-A window containing a large number of bouncing atoms should open in the top left of the \pharo image.
+A window containing a large number of bouncing atoms should open in the top left of the \pharo image. (\figref{atoms})
 
 You have just evaluated your first \st expression!
 You just sent the message \ct{new} to the \bam class, resulting in a new \bam instance, followed by the message \ct{openInWorld} to this instance.
-The \bam class decided what to do with the \ct{new} message, that is, it looked up its \emph{methods} for handling \ct{new} message and reacted appropriately.
+The \bam class decided what to do with the \ct{new} message, that is, it looked up its \emph{methods} for handling \ct{new} message and reacted appropriately, in this case returning an instance of \bam. 
 Similarly the \bam instance looked up its method for responding to \ct{openInWorld} and took appropriate action.
 
 If you talk to Smalltalkers for a while, you will quickly notice that they generally do not use expressions like ``call an operation'' or ``invoke a method'', but instead they will say ``send a message''.
@@ -281,12 +281,12 @@ The object, not you, selects the appropriate method for responding to your messa
 
 \begin{figure}[htb]
 \begin{minipage}[b]{0.48\textwidth}
-\centerline {\includegraphics[width=0.7\textwidth]{atoms}}
+\centerline {\includegraphics[width=0.8\textwidth]{atoms}}
 \caption{A \bam.\figlabel{atoms}}
 \end{minipage}
 \hfill
 \begin{minipage}[b]{0.48\textwidth}
-\centerline {\includegraphics[width=0.7\textwidth]{saveAs}}
+\centerline {\includegraphics[width=1.0\textwidth]{saveAs}}
 \caption{The \menu{save as \ldots} dialogue.\figlabel{saveas}}
 \end{minipage}
 \end{figure}
@@ -318,7 +318,7 @@ You might think that the image is the key mechanism for storing and managing sof
 As we shall see very soon, there are much better tools for managing code and sharing software developed by teams.
 Images are very useful, but you should learn to be very cavalier about creating and throwing away images, since tools like Monticello offer much better ways to manage versions and share code amongst developers.
 
-\dothis{Using the mouse (and the appropriate modifier keys), \metaclick on the \bam. \footnote{Remember, you may have to set the \ct{halosEnabled} option in the Preferences Browser. \btc{can't see this setting in Setting Browser - still valid?} } }
+\dothis{Using the mouse (and the appropriate modifier keys), \metaclick on the \bam. \footnote{Remember, you may have to set the \ct{halosEnabled} option in the Settings Browser. \btc{I can't see this setting in Setting Browser - still valid for 1.4?} } }
 You will see a collection of colored circles that are collectively called the \bam's morphic \subind{Morphic}{halo}.
 Each circle is called a \emph{handle}.
 Click in the pink handle containing the cross; the \bam should go away. 
@@ -332,7 +332,7 @@ Click in the pink handle containing the cross; the \bam should go away.
 \dothis{Position and resize the transcript and workspace windows so that the workspace just overlaps the transcript.}
 You can resize windows either by dragging one of the corners, or by \metaclick{ing} the window to bring up the morphic halo, and dragging the yellow (bottom right) handle.
 
-At any time only one window is active; it is in front and has its border highlighted.
+At any time only one window is active; it is in front, has its border highlighted and its title emphasised.
 % The mouse cursor must be in the window in which you wish to type.
 
 The transcript is an object that is often used for logging system messages.
@@ -342,7 +342,7 @@ It is a kind of ``system console''.
 % ON: I think the transcript has been made thread-safe now, right?
 
 Workspaces are useful for typing snippets of \st code that you would like to experiment with.
-You can also use workspaces simply for typing arbitrarily text that you would like to remember, such as to-do lists or instructions for anyone who will use your image.
+You can also use workspaces simply for typing arbitrary text that you would like to remember, such as to-do lists or instructions for anyone who will use your image.
 Workspaces are often used to hold documentation about a captured image, as is the case with the standard image that we downloaded earlier (see \figref{startup}).
 
 \dothis{Type the following text into the workspace:}
@@ -405,30 +405,36 @@ The title tells us that \ct{7} is an instance of the class \clsind{SmallInteger}
 The left panel allows us to browse the instance variables of an object, the values of which are shown in the right panel.
 The bottom panel can be used to write expressions to send messages to the object.
 
+\dothis{Type \ct{self squared} in the bottom panel of the inspector on \ct{7} and \menu{print it}.}
+
 \begin{figure}[htb]
 \centerline {\includegraphics[width=\textwidth]{InspectIt}}
 \caption{Inspecting an object. \figlabel{inspectit}}
 \end{figure}
 
-\dothis{Type \ct{self squared} in the bottom panel of the inspector on \ct{7} and \menu{print it}.}
 
 \needlines{2}
-\dothis{Close the inspector. Type the expression \ct{Object} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
+\dothis{Close the inspector. Type the expression \ct{BouncingAtomsMorph new} in a workspace and this time \menu{explore it} (\short{I}, uppercased i).}
 \index{keyboard shortcut!explore it}
 \index{explorer}
 
-This time you should see a window labelled \clsind{Object} containing the text
-\mbox{$\triangleright$ \ct{root: Object}}.
+This time you should see a window labelled \clsind{a BouncingAtomsMorph} containing the text
+\mbox{$\triangleright$ \ct{root: a BouncingAtomsMorph}}.
 Click on the triangle to open it up (\figref{exploreit}).
 
 \begin{figure}[htb]
-\centerline {\includegraphics[width=0.7\textwidth]{ExploreIt}}
-\caption{Exploring \ct{Object}. \figlabel{exploreit}}
+\centerline {\includegraphics[width=0.9\textwidth]{ExploreIt}}
+\caption{Exploring an instance of \ct{BouncingAtomsMorph}. \figlabel{exploreit}}
 \end{figure}
 
 The explorer is similar to the inspector, but it offers a tree view of a complex object.
-In this case the object we are looking at is the \ct{Object} class.
+In this case the object we are looking at an instance of the \ct{BouncingAtomsMorph} class.
 We can see directly all the information stored in this class, and we can easily navigate to all its parts.
+Again the bottom panel can be used to write expressions to send messages to the object.
+
+\dothis{Type the expression \ct{self openInWorld} in the bottom panel of the explorer, then select this and \menu{do it} }
+
+You will see \figref{atoms} again.
 
 %=================================================================
 \section{The Class Browser}
